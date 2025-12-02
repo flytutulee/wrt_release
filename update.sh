@@ -464,9 +464,7 @@ set_custom_task() {
 START=99
 
 boot() {
-    # 重新添加缓存请求定时任务
-    sed -i '/drop_caches/d' /etc/crontabs/root
-    echo "15 3 * * * sync && echo 3 > /proc/sys/vm/drop_caches" >>/etc/crontabs/root
+
 
     # 删除现有的 wireguard_watchdog 任务
     sed -i '/wireguard_watchdog/d' /etc/crontabs/root
@@ -539,7 +537,7 @@ update_nss_pbuf_performance() {
 set_build_signature() {
     local file="$BUILD_DIR/feeds/luci/modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/10_system.js"
     if [ -d "$(dirname "$file")" ] && [ -f $file ]; then
-        sed -i "s/(\(luciversion || ''\))/(\1) + (' \/ build by ZqinKing')/g" "$file"
+        sed -i "s/(\(luciversion || ''\))/(\1) + (' \/ Powered by Saya Krueger')/g" "$file"
     fi
 }
 
